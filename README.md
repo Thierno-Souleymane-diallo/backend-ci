@@ -21,17 +21,20 @@ Il intègre également l'endpoint technique de surveillance `/health` indispensa
 ## 🚀 Démarrage rapide en local
 
 ### Prérequis
+
 - Java 21 (OpenJDK)
 - Maven 3.8+
 - PostgreSQL 16 (ou conteneur Docker)
 
 ### 1. Cloner le projet
+
 ```bash
 git clone https://github.com/<votre-organisation>/backend-ci.git
 cd backend-ci
 ```
 
 ### 2. Variables d'environnement
+
 Le microservice est configurable via des variables d'environnement (avec valeurs par défaut) :
 
 | Variable | Description | Valeur par défaut |
@@ -45,11 +48,13 @@ Le microservice est configurable via des variables d'environnement (avec valeurs
 | `JPA_DDL_AUTO` | Stratégie Hibernate DDL | `update` |
 
 ### 3. Exécuter les tests unitaires
+
 ```bash
 mvn clean test
 ```
 
 ### 4. Lancer l'application
+
 ```bash
 mvn spring-boot:run
 ```
@@ -59,9 +64,11 @@ mvn spring-boot:run
 ## 🩺 Endpoints Clés
 
 ### Endpoint de Santé (Healthcheck)
+
 - **URL :** `http://localhost:8080/health`
 - **Méthode :** `GET`
 - **Réponse HTTP 200 :**
+
 ```json
 {
   "status": "UP",
@@ -73,6 +80,7 @@ mvn spring-boot:run
 ```
 
 ### Documentation interactive Swagger UI
+
 - **URL :** `http://localhost:8080/swagger-ui.html`
 - **Spécification OpenAPI (JSON) :** `http://localhost:8080/api-docs`
 
@@ -80,7 +88,7 @@ mvn spring-boot:run
 
 ## 🏗️ Structure du Dépôt
 
-```
+```text
 backend-ci/
 ├── pom.xml                                 # Configuration Maven et dépendances
 ├── README.md                               # Documentation technique du dépôt
