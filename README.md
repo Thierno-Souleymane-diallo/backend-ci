@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# backend-ci
-SunuSanté - API Spring Boot
-=======
 # Microservice Backend — SunuSanté (`backend-ci`)
 
 **Projet :** Examen Pratique DevOps (Master 2 SI-SR - UADB)  
@@ -115,4 +111,3 @@ backend-ci/
 │       └── resources/
 │           └── application.yml             # Configuration H2 pour CI
 ```
->>>>>>> a0bfea6 (feat(backend): initialisation projet Spring Boot 3.3.4 et endpoints F1, F2, F7 avec tests)
