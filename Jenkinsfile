@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Construire l image') {
             steps {
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
             }
         }
         stage('Publier sur Docker Hub') {
@@ -34,6 +34,7 @@ pipeline {
                                                   passwordVariable: 'DOCKER_TOKEN')]) {
                     sh 'echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin'
                     sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+		    sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
         }
