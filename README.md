@@ -111,3 +111,5 @@ backend-ci/
 │       └── resources/
 │           └── application.yml             # Configuration H2 pour CI
 ```
+
+Pipeline CI : declenchement automatique par Jenkins (polling toutes les 2 minutes)
