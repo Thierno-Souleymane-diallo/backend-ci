@@ -5,6 +5,9 @@ pipeline {
         IMAGE_NAME = 'thiernosouleymanediallo/sunusante-backend'
         IMAGE_TAG  = "${BUILD_NUMBER}"
     }
+    triggers {
+        pollSCM('H/2 * * * *')
+    }
 
     stages {
         stage('Compiler') {
