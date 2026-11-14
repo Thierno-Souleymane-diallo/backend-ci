@@ -12,6 +12,7 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: ${JPA_DDL_AUTO:update}
     show-sql: ${JPA_SHOW_SQL:false}
@@ -22,7 +23,7 @@ spring:
 
   sql:
     init:
-      mode: ${SQL_INIT_MODE:never}
+      mode: ${SQL_INIT_MODE:always}
 
 # Configuration Swagger / OpenAPI UI
 springdoc:

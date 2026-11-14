@@ -1,68 +1,61 @@
 -- ==============================================================================
 -- PROJET DEVOPS MASTER 2 SI-SR (UADB) - SUNUSANTÉ
--- Script DML : Données d'amorçage (Seed data) réalistes pour le Sénégal
--- Auteur : Tacko Ciss (Lead Backend & Base de données)
--- ==============================================================================
+-- Script DML : Données d'amorçage sécurisées pour le Sénégal
+-- ============================================================================== 
 
--- 1. Réinitialisation des séquences et nettoyage des données
-TRUNCATE TABLE rendez_vous, medecin, etablissement RESTART IDENTITY CASCADE;
+-- INSERTION DES ÉTABLISSEMENTS : noms réalistes et adaptés au contexte sénégalais
+INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
+SELECT 'Clinique de Dakar', 'CLINIQUE', 'Dakar', 'Avenue Cheikh Anta Diop, Dakar', '+221 33 824 15 15', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Clinique de Dakar' AND ville = 'Dakar');
 
--- ==============================================================================
--- INSERTION 1 : ÉTABLISSEMENTS DE SANTÉ
--- Échantillons représentatifs : Bambey (siège UADB), Diourbel, Dakar, Thiès
--- ==============================================================================
-INSERT INTO etablissement (nom, type, ville, adresse, telephone) VALUES
-('Centre de Santé de Bambey', 'CENTRE_DE_SANTE', 'Bambey', 'Quartier Escale, face Préfecture', '+221 33 973 11 22'),
-('Hôpital Régional Heinrich Lübke', 'HOPITAL', 'Diourbel', 'Route de Gossas', '+221 33 971 10 05'),
-('Hôpital Général Idrissa Pouye (HOGIP)', 'HOPITAL', 'Dakar', 'Grand Yoff, Voie de Dégagement Nord', '+221 33 869 40 50'),
-('Centre de Santé Gaspard Camara', 'CENTRE_DE_SANTE', 'Dakar', 'Avenue Cheikh Anta Diop', '+221 33 824 15 15'),
-('Poste de Santé de Médina', 'POSTE_DE_SANTE', 'Dakar', 'Rue 22 angle 11, Médina', '+221 33 821 30 40'),
-('Hôpital Régional de Thiès', 'HOPITAL', 'Thiès', 'Quartier Dixième, Route de Dakar', '+221 33 951 14 00');
+INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
+SELECT 'Centre de Santé de Thiès', 'CENTRE_DE_SANTE', 'Thiès', 'Route de Dakar, Thiès', '+221 33 951 14 00', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Centre de Santé de Thiès' AND ville = 'Thiès');
 
--- ==============================================================================
--- INSERTION 2 : MÉDECINS ET PRATICIENS
--- Rattachés aux établissements créés ci-dessus
--- ==============================================================================
-INSERT INTO medecin (nom, prenom, specialite, telephone, etablissement_id) VALUES
--- Centre de Santé de Bambey (id: 1)
-('Ndiaye', 'Dr. Cheikh', 'Pédiatrie', '+221 77 123 01 01', 1),
-('Sow', 'Dr. Fatou', 'Médecine Générale', '+221 77 123 01 02', 1),
+INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
+SELECT 'Hôpital Régional de Diourbel', 'HOPITAL', 'Diourbel', 'Route de Gossas, Diourbel', '+221 33 971 10 05', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Hôpital Régional de Diourbel' AND ville = 'Diourbel');
 
--- Hôpital Régional de Diourbel (id: 2)
-('Diallo', 'Dr. Amadou', 'Cardiologie', '+221 77 234 02 01', 2),
-('Gueye', 'Dr. Marième', 'Gynécologie', '+221 77 234 02 02', 2),
+INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
+SELECT 'Clinique Saint Michel', 'CLINIQUE', 'Saint-Louis', 'Boulevard du Président, Saint-Louis', '+221 33 961 45 10', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Clinique Saint Michel' AND ville = 'Saint-Louis');
 
--- HOGIP Dakar (id: 3)
-('Diop', 'Dr. Babacar', 'Cardiologie', '+221 77 345 03 01', 3),
-('Fall', 'Dr. Ibrahima', 'Dermatologie', '+221 77 345 03 02', 3),
+INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
+SELECT 'Centre de Santé de Bambey', 'CENTRE_DE_SANTE', 'Bambey', 'Quartier Escale, Bambey', '+221 33 973 11 22', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Centre de Santé de Bambey' AND ville = 'Bambey');
 
--- Centre Gaspard Camara Dakar (id: 4)
-('Ba', 'Dr. Mariama', 'Pédiatrie', '+221 77 456 04 01', 4),
-('Kane', 'Dr. Ousmane', 'Médecine Générale', '+221 77 456 04 02', 4),
+INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
+SELECT 'Polyclinique du Cap-Vert', 'CLINIQUE', 'Dakar', 'Avenue Lamine Gueye, Dakar', '+221 77 111 22 33', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Polyclinique du Cap-Vert' AND ville = 'Dakar');
 
--- Hôpital Régional de Thiès (id: 6)
-('Seck', 'Dr. Khady', 'Ophtalmologie', '+221 77 567 06 01', 6);
+-- INSERTION DES MÉDECINS
+INSERT INTO medecin (nom, prenom, specialite, telephone, etablissement_id)
+SELECT 'Ndiaye', 'Cheikh', 'Pédiatrie', '+221 77 123 45 67', id
+FROM etablissement WHERE nom = 'Centre de Santé de Bambey'
+AND NOT EXISTS (SELECT 1 FROM medecin WHERE nom = 'Ndiaye' AND prenom = 'Cheikh' AND etablissement_id = (SELECT id FROM etablissement WHERE nom = 'Centre de Santé de Bambey'));
 
--- ==============================================================================
--- INSERTION 3 : RENDEZ-VOUS & FILE D'ATTENTE DU JOUR
--- Utilisation de CURRENT_DATE pour garantir que la file d'attente du jour 
--- fonctionne à n'importe quelle date de démonstration ou d'évaluation
--- ==============================================================================
-INSERT INTO rendez_vous (nom_patient, telephone_patient, date_heure, motif, statut, medecin_id) VALUES
--- Consultations du jour pour le Dr. Cheikh Ndiaye (Bambey - id: 1)
-('Awa Diallo', '+221 77 500 11 22', CURRENT_DATE + TIME '08:30:00', 'Fièvre persistante enfant (3 ans)', 'TERMINE', 1),
-('Moussa Ba', '+221 78 600 33 44', CURRENT_DATE + TIME '09:15:00', 'Vaccination rappel 9 mois', 'EN_CONSULTATION', 1),
-('Aminata Ndiaye', '+221 76 700 55 66', CURRENT_DATE + TIME '10:00:00', 'Contrôle toux et bronchite', 'EN_ATTENTE', 1),
-('Modou Diagne', '+221 70 800 77 88', CURRENT_DATE + TIME '11:00:00', 'Visite de routine nourrisson', 'EN_ATTENTE', 1),
+INSERT INTO medecin (nom, prenom, specialite, telephone, etablissement_id)
+SELECT 'Diallo', 'Aminata', 'Médecine générale', '+221 77 234 56 78', id
+FROM etablissement WHERE nom = 'Clinique de Dakar'
+AND NOT EXISTS (SELECT 1 FROM medecin WHERE nom = 'Diallo' AND prenom = 'Aminata' AND etablissement_id = (SELECT id FROM etablissement WHERE nom = 'Clinique de Dakar'));
 
--- Consultations du jour pour le Dr. Fatou Sow (Bambey - id: 2)
-('Oumar Sy', '+221 77 111 22 33', CURRENT_DATE + TIME '09:00:00', 'Bilan de santé général', 'TERMINE', 2),
-('Khady Cissé', '+221 78 222 33 44', CURRENT_DATE + TIME '10:30:00', 'Hypertension et vertiges', 'EN_ATTENTE', 2),
+INSERT INTO medecin (nom, prenom, specialite, telephone, etablissement_id)
+SELECT 'Sarr', 'Modou', 'Cardiologie', '+221 76 345 67 89', id
+FROM etablissement WHERE nom = 'Hôpital Régional de Diourbel'
+AND NOT EXISTS (SELECT 1 FROM medecin WHERE nom = 'Sarr' AND prenom = 'Modou' AND etablissement_id = (SELECT id FROM etablissement WHERE nom = 'Hôpital Régional de Diourbel'));
 
--- Consultations à Dakar pour le Dr. Babacar Diop (HOGIP - id: 5)
-('Mamadou Fall', '+221 77 333 44 55', CURRENT_DATE + TIME '09:30:00', 'Suivi post-infarctus', 'EN_CONSULTATION', 5),
-('Aïssatou Sarr', '+221 76 444 55 66', CURRENT_DATE + TIME '11:30:00', 'Échographie cardiaque de contrôle', 'EN_ATTENTE', 5),
-('Ibrahima Diouf', '+221 70 555 66 77', CURRENT_DATE + TIME '14:00:00', 'Palpitations anormales à l''effort', 'EN_ATTENTE', 5),
+-- INSERTION DES RENDEZ-VOUS
+INSERT INTO rendez_vous (nom_patient, telephone_patient, date_heure, motif, statut, medecin_id)
+SELECT 'Awa Diop', '+221 77 500 11 22', CURRENT_DATE + TIME '08:30', 'Fièvre persistante', 'EN_ATTENTE', id
+FROM medecin WHERE nom = 'Ndiaye' AND prenom = 'Cheikh'
+AND NOT EXISTS (SELECT 1 FROM rendez_vous WHERE nom_patient = 'Awa Diop' AND telephone_patient = '+221 77 500 11 22');
 
--- Consultation annulée d'exemple
-('Seynabou Faye', '+221 77 666 77 88', CURRENT_DATE + TIME '15:00:00', 'Consultation générale', 'ANNULE', 2);
+INSERT INTO rendez_vous (nom_patient, telephone_patient, date_heure, motif, statut, medecin_id)
+SELECT 'Mamadou Faye', '+221 77 600 22 33', CURRENT_DATE + TIME '09:15', 'Suivi cardiaque', 'EN_CONSULTATION', id
+FROM medecin WHERE nom = 'Sarr' AND prenom = 'Modou'
+AND NOT EXISTS (SELECT 1 FROM rendez_vous WHERE nom_patient = 'Mamadou Faye' AND telephone_patient = '+221 77 600 22 33');
+
+INSERT INTO rendez_vous (nom_patient, telephone_patient, date_heure, motif, statut, medecin_id)
+SELECT 'Khady Ba', '+221 76 700 33 44', CURRENT_DATE + TIME '10:00', 'Consultation générale', 'TERMINE', id
+FROM medecin WHERE nom = 'Diallo' AND prenom = 'Aminata'
+AND NOT EXISTS (SELECT 1 FROM rendez_vous WHERE nom_patient = 'Khady Ba' AND telephone_patient = '+221 76 700 33 44');

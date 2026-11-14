@@ -1,6 +1,7 @@
 package sn.uadb.sunusante.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -47,6 +48,10 @@ public class Etablissement {
     @Size(max = 30)
     @Column(nullable = false, length = 30)
     private String telephone;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name = "mot_de_passe", length = 100)
+    private String motDePasse;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -120,6 +125,14 @@ public class Etablissement {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
 
     public LocalDateTime getCreatedAt() {

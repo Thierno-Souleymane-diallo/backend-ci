@@ -1,0 +1,31 @@
+flowchart LR
+    A[Client / Frontend / Postman] --> B[Controller REST
+Spring MVC]
+    B --> C[Service
+Logique métier]
+    C --> D[Repository
+JPA / PostgreSQL]
+    D --> E[(Base de données
+Etablissement, Medecin, Rendez-vous)]
+
+    B --> F[Swagger / OpenAPI]
+    C --> G[Exception Handler]
+    B --> H[/health
+Actuator]
+
+    subgraph Backend[Backend SunuSanté]
+        B
+        C
+        D
+        G
+        H
+    end
+
+    style A fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style B fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style C fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style D fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style E fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style F fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    style G fill:#ffebee,stroke:#d32f2f,stroke-width:2px
+    style H fill:#f1f8e9,stroke:#558b2f,stroke-width:2px

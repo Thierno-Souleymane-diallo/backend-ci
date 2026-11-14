@@ -21,12 +21,14 @@ CREATE TABLE etablissement (
     ville VARCHAR(100) NOT NULL,
     adresse VARCHAR(255) NOT NULL,
     telephone VARCHAR(30) NOT NULL,
+    mot_de_passe VARCHAR(255),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 COMMENT ON TABLE etablissement IS 'Structures sanitaires (hôpitaux, centres et postes de santé)';
 COMMENT ON COLUMN etablissement.type IS 'Type d''établissement : HOPITAL, CENTRE_DE_SANTE, POSTE_DE_SANTE, CLINIQUE';
 COMMENT ON COLUMN etablissement.ville IS 'Ville d''implantation (ex: Bambey, Dakar, Thiès)';
+COMMENT ON COLUMN etablissement.mot_de_passe IS 'Mot de passe hashé utilisé pour l''authentification de l''établissement';
 
 -- ==============================================================================
 -- TABLE 2 : medecin
