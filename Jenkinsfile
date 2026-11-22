@@ -5,12 +5,10 @@ pipeline {
         IMAGE_NAME = 'thiernosouleymanediallo/sunusante-backend'
         IMAGE_TAG  = "${BUILD_NUMBER}"
     }
-<<<<<<< HEAD
+
     triggers {
         pollSCM('H/2 * * * *')
     }
-=======
->>>>>>> dd63ee2 (Backend finalise: auth, rendez-vous, seed data, config CI)
 
     stages {
         stage('Compiler') {
@@ -40,8 +38,7 @@ pipeline {
                                                   passwordVariable: 'DOCKER_TOKEN')]) {
                     sh 'echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin'
                     sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
-<<<<<<< HEAD
-		    sh "docker push ${IMAGE_NAME}:latest"
+                    sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
         }
@@ -51,12 +48,6 @@ pipeline {
                       parameters: [string(name: 'BACKEND_TAG', value: "${IMAGE_TAG}")]
             }
         }
-=======
-                    sh "docker push ${IMAGE_NAME}:latest"
-                }
-            }
-        }
->>>>>>> dd63ee2 (Backend finalise: auth, rendez-vous, seed data, config CI)
     }
 
     post {
@@ -70,8 +61,4 @@ pipeline {
             echo 'Echec du pipeline CI backend'
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dd63ee2 (Backend finalise: auth, rendez-vous, seed data, config CI)

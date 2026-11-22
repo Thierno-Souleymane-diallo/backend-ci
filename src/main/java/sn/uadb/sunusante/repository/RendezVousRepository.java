@@ -18,6 +18,14 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
      */
     List<RendezVous> findByTelephonePatientOrderByDateHeureDesc(String telephonePatient);
 
+    @Query("SELECT r FROM RendezVous r WHERE r.telephonePatient = :telephone " +
+           "OR REPLACE(REPLACE(REPLACE(r.telephonePatient, ' ', ''), '-', ''), '+221', '') = :normalized " +
+           "ORDER BY r.dateHeure DESC")
+    List<RendezVous> searchByTelephone(
+        @Param("telephone") String telephone,
+        @Param("normalized") String normalized
+    );
+
     /**
      * File d'attente d'un établissement pour une plage de date/heure donnée, triée par heure - Endpoint F5
      */

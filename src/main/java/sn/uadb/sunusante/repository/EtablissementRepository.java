@@ -12,6 +12,8 @@ public interface EtablissementRepository extends JpaRepository<Etablissement, Lo
 
     Optional<Etablissement> findByNomIgnoreCase(String nom);
 
+    Optional<Etablissement> findFirstByNomIgnoreCase(String nom);
+
     /**
      * Recherche des établissements par ville (insensible à la casse) - Endpoint F1
      */

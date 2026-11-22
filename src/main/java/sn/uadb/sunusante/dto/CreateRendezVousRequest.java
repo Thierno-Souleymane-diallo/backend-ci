@@ -1,11 +1,13 @@
 package sn.uadb.sunusante.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Schema(description = "Demande de prise d'un rendez-vous médical")
 public class CreateRendezVousRequest {
@@ -82,5 +84,17 @@ public class CreateRendezVousRequest {
 
     public void setMedecinId(Long medecinId) {
         this.medecinId = medecinId;
+    }
+
+    @JsonProperty("medecin")
+    public void unpackNestedMedecin(Map<String, Object> medecin) {
+        if (this.medecinId == null && medecin != null && medecin.get("id") != null) {
+            Object idObj = medecin.get("id");
+            if (idObj instanceof Number num) {
+                this.medecinId = num.longValue();
+            } else {
+                this.medecinId = Long.valueOf(idObj.toString());
+            }
+        }
     }
 }

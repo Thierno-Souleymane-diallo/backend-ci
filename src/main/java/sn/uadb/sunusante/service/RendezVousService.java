@@ -74,7 +74,12 @@ public class RendezVousService {
             throw new IllegalArgumentException("Le numéro de téléphone est obligatoire");
         }
 
-        return rendezVousRepository.findByTelephonePatientOrderByDateHeureDesc(telephone.trim())
+        String trimmed = telephone.trim();
+        String normalized = trimmed
+                .replaceAll("[\\s.\\-()]", "")
+                .replaceFirst("^(\\+221|00221|221)", "");
+
+        return rendezVousRepository.searchByTelephone(trimmed, normalized)
                 .stream()
                 .map(RendezVousDTO::fromEntity)
                 .collect(Collectors.toList());
@@ -106,7 +111,12 @@ public class RendezVousService {
         LocalDateTime startOfDay = targetDate.atStartOfDay();
         LocalDateTime endOfDay = targetDate.plusDays(1).atStartOfDay();
 
-        List<StatutRendezVous> statuts = List.of(StatutRendezVous.EN_ATTENTE, StatutRendezVous.EN_CONSULTATION);
+        List<StatutRendezVous> statuts = List.of(
+                StatutRendezVous.EN_ATTENTE,
+                StatutRendezVous.EN_CONSULTATION,
+                StatutRendezVous.TERMINE,
+                StatutRendezVous.ANNULE
+        );
         return rendezVousRepository.findFileAttente(etablissementId, startOfDay, endOfDay, statuts)
                 .stream()
                 .map(RendezVousDTO::fromEntity)
