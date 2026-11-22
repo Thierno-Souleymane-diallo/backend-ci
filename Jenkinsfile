@@ -5,6 +5,7 @@ pipeline {
         IMAGE_NAME = 'thiernosouleymanediallo/sunusante-backend'
         IMAGE_TAG  = "${BUILD_NUMBER}"
     }
+
     triggers {
         pollSCM('H/2 * * * *')
     }
@@ -37,7 +38,7 @@ pipeline {
                                                   passwordVariable: 'DOCKER_TOKEN')]) {
                     sh 'echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin'
                     sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
-		    sh "docker push ${IMAGE_NAME}:latest"
+                    sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
         }

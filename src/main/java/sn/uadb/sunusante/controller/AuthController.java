@@ -4,6 +4,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import sn.uadb.sunusante.repository.EtablissementRepository;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     private final EtablissementRepository repository;
@@ -29,7 +31,7 @@ public class AuthController {
         String nom = req.nom() == null ? "" : req.nom().trim();
         String mdp = req.motDePasse() == null ? "" : req.motDePasse();
 
-        return repository.findByNomIgnoreCase(nom)
+        return repository.findFirstByNomIgnoreCase(nom)
                 .filter(e -> e.getMotDePasse() != null && encoder.matches(mdp, e.getMotDePasse()))
                 .<ResponseEntity<?>>map(e -> ResponseEntity.ok(Map.of("id", e.getId(), "nom", e.getNom())))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED)

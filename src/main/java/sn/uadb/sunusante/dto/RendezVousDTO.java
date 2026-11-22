@@ -42,6 +42,9 @@ public class RendezVousDTO {
     @Schema(description = "Nom de l'établissement", example = "Centre de Santé de Bambey")
     private String etablissementNom;
 
+    @Schema(description = "Informations complètes du médecin")
+    private MedecinDTO medecin;
+
     @Schema(description = "Date de création du rendez-vous")
     private LocalDateTime createdAt;
 
@@ -70,6 +73,7 @@ public class RendezVousDTO {
             dto.setMedecinId(entity.getMedecin().getId());
             dto.setMedecinNom(entity.getMedecin().getNom() + " " + entity.getMedecin().getPrenom());
             dto.setMedecinSpecialite(entity.getMedecin().getSpecialite());
+            dto.setMedecin(MedecinDTO.fromEntity(entity.getMedecin()));
             if (entity.getMedecin().getEtablissement() != null) {
                 dto.setEtablissementId(entity.getMedecin().getEtablissement().getId());
                 dto.setEtablissementNom(entity.getMedecin().getEtablissement().getNom());
@@ -165,6 +169,14 @@ public class RendezVousDTO {
 
     public void setEtablissementNom(String etablissementNom) {
         this.etablissementNom = etablissementNom;
+    }
+
+    public MedecinDTO getMedecin() {
+        return medecin;
+    }
+
+    public void setMedecin(MedecinDTO medecin) {
+        this.medecin = medecin;
     }
 
     public LocalDateTime getCreatedAt() {

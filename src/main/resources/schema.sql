@@ -5,16 +5,11 @@
 -- Date : Novembre 2026
 -- ==============================================================================
 
--- 1. Nettoyage préventif des tables (ordre respectant les clés étrangères)
-DROP TABLE IF EXISTS rendez_vous CASCADE;
-DROP TABLE IF EXISTS medecin CASCADE;
-DROP TABLE IF EXISTS etablissement CASCADE;
-
 -- ==============================================================================
 -- TABLE 1 : etablissement
 -- Représente les structures de santé partenaires au Sénégal
 -- ==============================================================================
-CREATE TABLE etablissement (
+CREATE TABLE IF NOT EXISTS etablissement (
     id SERIAL PRIMARY KEY,
     nom VARCHAR(150) NOT NULL,
     type VARCHAR(50) NOT NULL CHECK (type IN ('HOPITAL', 'CENTRE_DE_SANTE', 'POSTE_DE_SANTE', 'CLINIQUE')),
@@ -34,7 +29,7 @@ COMMENT ON COLUMN etablissement.mot_de_passe IS 'Mot de passe hashé utilisé po
 -- TABLE 2 : medecin
 -- Praticiens rattachés à un établissement médical
 -- ==============================================================================
-CREATE TABLE medecin (
+CREATE TABLE IF NOT EXISTS medecin (
     id SERIAL PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
@@ -55,7 +50,7 @@ COMMENT ON COLUMN medecin.specialite IS 'Domaine médical (ex: Pédiatrie, Cardi
 -- TABLE 3 : rendez_vous
 -- Réservations de consultations des patients et gestion de file d'attente
 -- ==============================================================================
-CREATE TABLE rendez_vous (
+CREATE TABLE IF NOT EXISTS rendez_vous (
     id SERIAL PRIMARY KEY,
     nom_patient VARCHAR(150) NOT NULL,
     telephone_patient VARCHAR(30) NOT NULL,
@@ -80,17 +75,17 @@ COMMENT ON COLUMN rendez_vous.statut IS 'Statut de consultation : EN_ATTENTE, EN
 -- ==============================================================================
 
 -- Pour la recherche et filtrage par ville (Endpoint F1 : /api/etablissements?ville=)
-CREATE INDEX idx_etablissement_ville ON etablissement(ville);
+CREATE INDEX IF NOT EXISTS idx_etablissement_ville ON etablissement(ville);
 
 -- Pour lister les médecins d'une structure (Endpoint F2 : /api/etablissements/{id}/medecins)
-CREATE INDEX idx_medecin_etablissement ON medecin(etablissement_id);
+CREATE INDEX IF NOT EXISTS idx_medecin_etablissement ON medecin(etablissement_id);
 
 -- Pour filtrer les médecins par spécialité
-CREATE INDEX idx_medecin_specialite ON medecin(specialite);
+CREATE INDEX IF NOT EXISTS idx_medecin_specialite ON medecin(specialite);
 
 -- Pour retrouver les consultations d'un patient par son téléphone (Endpoint F4 : /api/rendez-vous?telephone=)
-CREATE INDEX idx_rendez_vous_telephone ON rendez_vous(telephone_patient);
+CREATE INDEX IF NOT EXISTS idx_rendez_vous_telephone ON rendez_vous(telephone_patient);
 
 -- Pour afficher et trier rapidement la file d'attente du jour (Endpoint F5 : /api/etablissements/{id}/file-attente)
-CREATE INDEX idx_rendez_vous_date_heure ON rendez_vous(date_heure);
-CREATE INDEX idx_rendez_vous_statut ON rendez_vous(statut);
+CREATE INDEX IF NOT EXISTS idx_rendez_vous_date_heure ON rendez_vous(date_heure);
+CREATE INDEX IF NOT EXISTS idx_rendez_vous_statut ON rendez_vous(statut);

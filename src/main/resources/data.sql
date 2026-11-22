@@ -44,6 +44,21 @@ SELECT 'Sarr', 'Modou', 'Cardiologie', '+221 76 345 67 89', id
 FROM etablissement WHERE nom = 'Hôpital Régional de Diourbel'
 AND NOT EXISTS (SELECT 1 FROM medecin WHERE nom = 'Sarr' AND prenom = 'Modou' AND etablissement_id = (SELECT id FROM etablissement WHERE nom = 'Hôpital Régional de Diourbel'));
 
+INSERT INTO medecin (nom, prenom, specialite, telephone, etablissement_id)
+SELECT 'Seck', 'Khady', 'Ophtalmologie', '+221 77 567 06 01', id
+FROM etablissement WHERE nom = 'Centre de Santé de Thiès'
+AND NOT EXISTS (SELECT 1 FROM medecin WHERE nom = 'Seck' AND prenom = 'Khady' AND etablissement_id = (SELECT id FROM etablissement WHERE nom = 'Centre de Santé de Thiès'));
+
+INSERT INTO medecin (nom, prenom, specialite, telephone, etablissement_id)
+SELECT 'Gueye', 'Marième', 'Gynécologie-obstétrique', '+221 77 234 02 02', id
+FROM etablissement WHERE nom = 'Clinique Saint Michel'
+AND NOT EXISTS (SELECT 1 FROM medecin WHERE nom = 'Gueye' AND prenom = 'Marième' AND etablissement_id = (SELECT id FROM etablissement WHERE nom = 'Clinique Saint Michel'));
+
+INSERT INTO medecin (nom, prenom, specialite, telephone, etablissement_id)
+SELECT 'Fall', 'Ibrahima', 'Dermatologie', '+221 77 345 03 02', id
+FROM etablissement WHERE nom = 'Polyclinique du Cap-Vert'
+AND NOT EXISTS (SELECT 1 FROM medecin WHERE nom = 'Fall' AND prenom = 'Ibrahima' AND etablissement_id = (SELECT id FROM etablissement WHERE nom = 'Polyclinique du Cap-Vert'));
+
 -- INSERTION DES RENDEZ-VOUS
 INSERT INTO rendez_vous (nom_patient, telephone_patient, date_heure, motif, statut, medecin_id)
 SELECT 'Awa Diop', '+221 77 500 11 22', CURRENT_DATE + TIME '08:30', 'Fièvre persistante', 'EN_ATTENTE', id

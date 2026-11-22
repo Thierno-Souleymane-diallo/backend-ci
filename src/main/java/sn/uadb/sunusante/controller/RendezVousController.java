@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rendez-vous")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 @Tag(name = "Rendez-vous", description = "Prise de rendez-vous et suivi des consultations")
 public class RendezVousController {
@@ -30,7 +30,7 @@ public class RendezVousController {
         this.rendezVousService = rendezVousService;
     }
 
-    @PostMapping
+    @PostMapping("/rendez-vous")
     @Operation(
         summary = "Prendre un rendez-vous",
         description = "Crée un rendez-vous pour un patient avec un médecin donné. Le statut initial est EN_ATTENTE."
@@ -45,13 +45,13 @@ public class RendezVousController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/rendez-vous/{id}")
     @Operation(summary = "Récupérer un rendez-vous par son identifiant")
     public ResponseEntity<RendezVousDTO> getRendezVousById(@PathVariable Long id) {
         return ResponseEntity.ok(rendezVousService.getRendezVousById(id));
     }
 
-    @GetMapping
+    @GetMapping("/rendez-vous")
     @Operation(summary = "Rechercher les rendez-vous d'un patient par téléphone")
     public ResponseEntity<List<RendezVousDTO>> getRendezVousByTelephone(
             @Parameter(description = "Téléphone du patient", example = "+221771234567")
@@ -59,7 +59,7 @@ public class RendezVousController {
         return ResponseEntity.ok(rendezVousService.getRendezVousByTelephone(telephone));
     }
 
-    @PutMapping("/{id}/statut")
+    @RequestMapping(value = "/rendez-vous/{id}/statut", method = {RequestMethod.PUT, RequestMethod.PATCH})
     @Operation(summary = "Mettre à jour le statut d'un rendez-vous")
     public ResponseEntity<RendezVousDTO> updateStatut(
             @PathVariable Long id,
@@ -67,7 +67,7 @@ public class RendezVousController {
         return ResponseEntity.ok(rendezVousService.updateStatut(id, request.getStatut()));
     }
 
-    @GetMapping("/etablissement/{etablissementId}/file-attente")
+    @GetMapping({"/etablissements/{etablissementId}/file-attente", "/rendez-vous/etablissement/{etablissementId}/file-attente"})
     @Operation(summary = "Afficher la file d'attente d'un établissement pour une date donnée")
     public ResponseEntity<List<RendezVousDTO>> getFileAttente(
             @PathVariable Long etablissementId,
