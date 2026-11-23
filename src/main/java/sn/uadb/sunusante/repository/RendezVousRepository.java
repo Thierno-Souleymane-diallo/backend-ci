@@ -39,4 +39,12 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
         @Param("endOfDay") LocalDateTime endOfDay,
         @Param("statuts") List<StatutRendezVous> statuts
     );
+
+    @Query("SELECT r FROM RendezVous r WHERE r.medecin.etablissement.id = :etablissementId " +
+           "AND r.statut IN (:statuts) " +
+           "ORDER BY r.dateHeure ASC")
+    List<RendezVous> findAllFileAttente(
+        @Param("etablissementId") Long etablissementId,
+        @Param("statuts") List<StatutRendezVous> statuts
+    );
 }

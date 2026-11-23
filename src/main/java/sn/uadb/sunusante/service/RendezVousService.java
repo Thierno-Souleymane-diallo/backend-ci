@@ -107,17 +107,23 @@ public class RendezVousService {
             throw new ResourceNotFoundException("Établissement non trouvé avec l'id : " + etablissementId);
         }
 
-        LocalDate targetDate = date != null ? date : LocalDate.now();
-        LocalDateTime startOfDay = targetDate.atStartOfDay();
-        LocalDateTime endOfDay = targetDate.plusDays(1).atStartOfDay();
-
         List<StatutRendezVous> statuts = List.of(
                 StatutRendezVous.EN_ATTENTE,
                 StatutRendezVous.EN_CONSULTATION,
                 StatutRendezVous.TERMINE,
                 StatutRendezVous.ANNULE
         );
-        return rendezVousRepository.findFileAttente(etablissementId, startOfDay, endOfDay, statuts)
+
+        if (date != null) {
+            LocalDateTime startOfDay = date.atStartOfDay();
+            LocalDateTime endOfDay = date.plusDays(1).atStartOfDay();
+            return rendezVousRepository.findFileAttente(etablissementId, startOfDay, endOfDay, statuts)
+                    .stream()
+                    .map(RendezVousDTO::fromEntity)
+                    .collect(Collectors.toList());
+        }
+
+        return rendezVousRepository.findAllFileAttente(etablissementId, statuts)
                 .stream()
                 .map(RendezVousDTO::fromEntity)
                 .collect(Collectors.toList());

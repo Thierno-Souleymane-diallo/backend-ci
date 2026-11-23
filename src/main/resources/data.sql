@@ -5,27 +5,27 @@
 
 -- INSERTION DES ÉTABLISSEMENTS : noms réalistes et adaptés au contexte sénégalais
 INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
-SELECT 'Clinique de Dakar', 'CLINIQUE', 'Dakar', 'Avenue Cheikh Anta Diop, Dakar', '+221 33 824 15 15', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+SELECT 'Clinique de Dakar', 'CLINIQUE', 'Dakar', 'Avenue Cheikh Anta Diop, Dakar', '+221 33 824 15 15', '$2b$10$z2HY5Ny/aTNBASOvMlhIE.ZWLAMcD8vt8HYp2O8a9lO29au//Lbdy'
 WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Clinique de Dakar' AND ville = 'Dakar');
 
 INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
-SELECT 'Centre de Santé de Thiès', 'CENTRE_DE_SANTE', 'Thiès', 'Route de Dakar, Thiès', '+221 33 951 14 00', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+SELECT 'Centre de Santé de Thiès', 'CENTRE_DE_SANTE', 'Thiès', 'Route de Dakar, Thiès', '+221 33 951 14 00', '$2b$10$z2HY5Ny/aTNBASOvMlhIE.ZWLAMcD8vt8HYp2O8a9lO29au//Lbdy'
 WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Centre de Santé de Thiès' AND ville = 'Thiès');
 
 INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
-SELECT 'Hôpital Régional de Diourbel', 'HOPITAL', 'Diourbel', 'Route de Gossas, Diourbel', '+221 33 971 10 05', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+SELECT 'Hôpital Régional de Diourbel', 'HOPITAL', 'Diourbel', 'Route de Gossas, Diourbel', '+221 33 971 10 05', '$2b$10$z2HY5Ny/aTNBASOvMlhIE.ZWLAMcD8vt8HYp2O8a9lO29au//Lbdy'
 WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Hôpital Régional de Diourbel' AND ville = 'Diourbel');
 
 INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
-SELECT 'Clinique Saint Michel', 'CLINIQUE', 'Saint-Louis', 'Boulevard du Président, Saint-Louis', '+221 33 961 45 10', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+SELECT 'Clinique Saint Michel', 'CLINIQUE', 'Saint-Louis', 'Boulevard du Président, Saint-Louis', '+221 33 961 45 10', '$2b$10$z2HY5Ny/aTNBASOvMlhIE.ZWLAMcD8vt8HYp2O8a9lO29au//Lbdy'
 WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Clinique Saint Michel' AND ville = 'Saint-Louis');
 
 INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
-SELECT 'Centre de Santé de Bambey', 'CENTRE_DE_SANTE', 'Bambey', 'Quartier Escale, Bambey', '+221 33 973 11 22', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+SELECT 'Centre de Santé de Bambey', 'CENTRE_DE_SANTE', 'Bambey', 'Quartier Escale, Bambey', '+221 33 973 11 22', '$2b$10$z2HY5Ny/aTNBASOvMlhIE.ZWLAMcD8vt8HYp2O8a9lO29au//Lbdy'
 WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Centre de Santé de Bambey' AND ville = 'Bambey');
 
 INSERT INTO etablissement (nom, type, ville, adresse, telephone, mot_de_passe)
-SELECT 'Polyclinique du Cap-Vert', 'CLINIQUE', 'Dakar', 'Avenue Lamine Gueye, Dakar', '+221 77 111 22 33', '$2b$10$zwo2NU0Nr29ETi.90dQo0eNkWJmGykA0/FqQuJu6C37PprQTcHQB6'
+SELECT 'Polyclinique du Cap-Vert', 'CLINIQUE', 'Dakar', 'Avenue Lamine Gueye, Dakar', '+221 77 111 22 33', '$2b$10$z2HY5Ny/aTNBASOvMlhIE.ZWLAMcD8vt8HYp2O8a9lO29au//Lbdy'
 WHERE NOT EXISTS (SELECT 1 FROM etablissement WHERE nom = 'Polyclinique du Cap-Vert' AND ville = 'Dakar');
 
 -- INSERTION DES MÉDECINS
